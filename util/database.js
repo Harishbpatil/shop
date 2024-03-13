@@ -1,16 +1,19 @@
 const mongodb = require("mongodb");
-require('dotenv').config();
+require("dotenv").config();
 const { MongoClient } = mongodb;
 
 let _db;
 
 const mongoConnect = (callback) => {
-  const uri = process.env.MONGODB_URI; 
+  const uri = process.env.MONGODB_URI;
   if (!uri) {
     throw new Error("MongoDB URI not found in environment variables.");
   }
 
-  MongoClient.connect(uri)
+  // MongoDB options with unified topology
+  const options = { useUnifiedTopology: true };
+
+  MongoClient.connect(uri, options) // Pass options to MongoClient.connect
     .then((client) => {
       console.log("Connected to MongoDB!");
       _db = client.db();
