@@ -34,7 +34,7 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    process.env.MONGODB_URI
+    'mongodb+srv://harish:harish123@cluster0.c4za7nm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
   )
   .then(result => {
     User.findOne().then(user => {
